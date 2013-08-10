@@ -1,0 +1,8 @@
+<div>
+
+  <form action="/post/<%= @post.id %>/edit" method="POST">
+    <%= erb :_form_fields, layout: false %>
+    <input type="submit" value="Update Post">
+  </form>
+
+</div>

@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Welcome to Awesome Blog!</h1>
+  <p><%= @message %></p>
+
+  <a href='/posts/new'>MAKE A POST</a>
+
+  <h2>List of Posts</h2>
+  <table>
+   <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><a href="/posts/<%= post.id %>"><%= post.post_title %></a></td>
+      </tr>
+    <% end %>
+   </tbody>
+  </table>
+</div>

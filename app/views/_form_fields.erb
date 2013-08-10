@@ -1,0 +1,15 @@
+<label for="title">Post Title:</label>
+<input id="title" type="text" name="post[title]" value="<%=@post.try(:title)%>">
+<br>
+<label for="author_name">Author Name:</label>
+<input id="author_name" type="text" name="post[author_name]" value="<%=@post.try(:author_name)%>">
+<br>
+<label for="body">Type Post Here:</label>
+<textarea id="body" type="text" name="post[body]"> <%=@post.try(:body)%> </textarea>
+<br>
+<label for="post_tags">Tags:</label>
+<input id="post_tags" name="post[tags]">
+<br>
+
+
+

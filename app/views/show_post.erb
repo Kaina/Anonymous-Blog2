@@ -1,0 +1,11 @@
+<div class="container" > 
+  <p><%= @post.post_title  %></p>
+  <p><%= @post.post_author %></p>
+  <p><%= @post.post_body  %></p>
+  
+  <p><% @tags.each do |tag| %></p>
+  <p><%= tag.tag_name %></p>
+  <p><% end %></p>
+
+  <p><a href = "/posts/<%= @post.id %>/edit" title = "/posts/<%= @post.id %>/edit">EDIT</a>
+</div>
