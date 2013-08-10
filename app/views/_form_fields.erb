@@ -8,7 +8,11 @@
 <textarea id="body" type="text" name="post[body]"> <%=@post.try(:body)%> </textarea>
 <br>
 <label for="post_tags">Tags:</label>
-<input id="post_tags" name="post[tags]">
+<% @post.tags.each do |tag| %>
+<input id="post_tags" name="post[tags]"
+value="<%=tag.name%>"
+>
+<% end%>
 <br>
 
 

@@ -2,6 +2,7 @@
 <h1>Make a New Post<h2>
 
 <form id="new-post" action="/posts" method="POST">
-  <%= erb :_post_form, layout: false %>
+  <%= erb :_form_fields, layout: false %>
+  <input type="submit" value="Submit Post">
 </form>
 </div>

@@ -1,47 +1,48 @@
-get 'post/:post_id' do
-  @post = Post.find(params[:post_id])
-  erb :show_post
-end
+get '/post/new' do
+  @post = Post.create(params[:id])
 
-get '/posts/new' do
-  # @post = Post.create(params[:id])
-  # @message = "this is our individual post page"
   erb :new
 end
 
-get '/posts/:id' do
-  @post = Post.find(params[:id])
-  @message = "this is our individual post page"
+get '/post/:post_id' do
+  @post = Post.find(params[:post_id])
   @tags = @post.tags
-  erb :show
+  puts @tags
+  puts "***********************************"
+  erb :show_post
 end
 
-get '/posts/:id/edit' do
-  puts params.inspect
-  @post = Post.find(params[:id])
-  @message = "this is our individual edit page"
-  erb :edit
+get '/post/:post_id/edit' do
+  @post = Post.find(params[:post_id])
+  erb :edit_post
+end
+
+get '/post/:post_id/delete' do
+  @post = Post.destroy(params[:post_id])
+  redirect to '/'
 end
 
 post '/posts' do
-  @post = Post.create(params[:post])
-  
-  params[:tag][:tag_name].split(', ').each do |tag|
-    @post.tags.find_or_create_by_tag_name(tag)
+  @post = Post.create(title: params[:post][:title], author_name: params[:post][:author_name], body: params[:post][:body])
+  list_of_tags = params[:post][:tags]
+  list_of_tags.split(", ").each do |tag|
+    new_tag = Tag.find_or_create_by_name(tag)
+    # @post.tags.find_or_create_by_name(tag)
+    @post.tags << new_tag
   end
-
-  @tags = @post.tags
-  erb :show
+  redirect "/post/#{@post.id}"
 end
 
-post '/posts/:id' do
-  @post = Post.find(params[:id])
-  @post.update_attributes(params[:post])
-  @message = "this is our individual edit page"
-  redirect to("/posts/#{@post.id}")
+post '/post/:post_id/edit' do
+  @post = Post.find(params[:post_id])
+  @post.update_attributes(title: params[:title], body: params[:body])
+  tags = params[:tags]
+  tags.split(', ').each do |tag|
+    new_tag = Tag.find_or_create_by_name(tag)
+    @post.tags << new_tag
+  end
+  redirect "/post/#{@post.id}"
 end
 
-post '/posts/:id/delete' do
-  # @post = Post.destroy(params[:id])
-  redirect to '/'
-end
+
+
